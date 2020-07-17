@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cg.entity.BookInfo;
 import com.cg.entity.CategoryInfo;
+import com.cg.exception.InvalidBookIdException;
 import com.cg.model.BookInfoDetails;
 
 public interface BookCategoryServiceI {
@@ -22,7 +23,7 @@ public interface BookCategoryServiceI {
 	
 	void deleteCategory(int id);
 
-	void deleteBook(int id);
+	List<BookInfo> deleteBook(int id)throws InvalidBookIdException;
 	
 
 }

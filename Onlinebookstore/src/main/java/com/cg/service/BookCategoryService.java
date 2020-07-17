@@ -12,6 +12,7 @@ import com.cg.dao.BookDaoI;
 import com.cg.dao.CategoryDaoI;
 import com.cg.entity.BookInfo;
 import com.cg.entity.CategoryInfo;
+import com.cg.exception.InvalidBookIdException;
 import com.cg.model.BookInfoDetails;
 
 @Service
@@ -83,7 +84,9 @@ public class BookCategoryService implements BookCategoryServiceI {
 	}
 
 	@Override
-	public void deleteBook(int id) {
+	public List<BookInfo>  deleteBook(int id) throws InvalidBookIdException {
 		book_dao.deleteById(id);
+		return null;
+			
+		}
 	}
-}

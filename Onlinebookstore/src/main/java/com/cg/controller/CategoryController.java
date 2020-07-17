@@ -7,20 +7,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.entity.BookInfo;
 import com.cg.entity.CategoryInfo;
+import com.cg.exception.InvalidBookIdException;
 import com.cg.model.BookInfoDetails;
 import com.cg.service.BookCategoryServiceI;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class CategoryController {
+	
+	@ResponseStatus(value=HttpStatus.NOT_FOUND,reason="controller account is not present")
+	@ExceptionHandler({Exception.class})
+	public void handleException()
+	{
+		
+	}
 	
 	@Autowired
 	private BookCategoryServiceI book_catg_service;
@@ -90,8 +100,10 @@ public class CategoryController {
 				
 		//delete Book
 				@DeleteMapping("/delete_book/{id}")
-				public void deleteBook(@PathVariable ("id") int id){
-				book_catg_service.deleteBook(id);
+				public ResponseEntity<List<BookInfo>> deleteBook(@PathVariable ("id") int id)throws InvalidBookIdException{
+					List<BookInfo> list=book_catg_service.deleteBook(id);
+					return new ResponseEntity<List<BookInfo>>(list, HttpStatus.OK);
+				
 				
 				}				
 			//delete category
