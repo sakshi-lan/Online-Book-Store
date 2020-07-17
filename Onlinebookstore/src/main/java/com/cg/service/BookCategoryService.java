@@ -84,7 +84,7 @@ public class BookCategoryService implements BookCategoryServiceI {
 	}
 
 	@Override
-	public List<BookInfo>  deleteBook(int id) throws InvalidBookIdException {
+	public List<BookInfo>  deleteBook(int id) throws InvalidBookIdException{	
 		book_dao.deleteById(id);
 		return null;
 			
